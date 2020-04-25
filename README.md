@@ -1,6 +1,6 @@
 # Duck Hunt
-## Board
-    https://trello.com/b/EIygTVwM/duck-hunter
+## [Board](https://trello.com/b/EIygTVwM/duck-hunter)
+    
 ## Descripción
 Mi primer juego consiste en un escenario fijo en el que van apareciendo patos y debemos cazarlos.
 
