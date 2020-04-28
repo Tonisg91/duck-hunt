@@ -17,7 +17,7 @@ El objetivo es conseguir el mayor numero de puntos en el tiempo predeterminado.
 La forma de cazar los patos será colocar a nuestro personaje debajo del pato y utilizar una tecla definida para lanzar una red hacia arriba.
 
 ## MVP - User stories
-- Elegir cuando empieza el juego.
+- Elegir cuando empieza el juego. DONE
 - La puntuacion  y los comandos tienen que ser visibles.
 - El tablero tiene que ser visible. (Fondo, pato, cazador).
 - Tiene que haber una tecla para disparar la red.
