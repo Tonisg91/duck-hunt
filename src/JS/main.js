@@ -37,7 +37,7 @@ const main = () => {
         </div>
         <div>
           <h2 class="center">S</h2>
-          <p>Shoot trap</p>
+          <p>Shot</p>
         </div>
         <div>
           <h2 class="center">D</h2>
@@ -90,46 +90,32 @@ const main = () => {
     canvasElement.setAttribute("width", width);
     canvasElement.setAttribute("height", height);
     //CANVAS END
+
     const backGround = new Board(canvasElement);
     backGround.buildBackground(playersNumber);
     backGround.score(playersNumber);
+
     //Create new Game
     const game = new Game(canvasElement);
     game.draw();
+
     //Timer coundtown
     const timer = setInterval(function () {
       game.startCrono();
     }, 1000);
+
     //Movement and shot key listener
     document.addEventListener("keydown", (event) => {
-      let key = event.key;
-      switch (key) {
-        case "a":
-          console.log(game.player);
-          game.player.moveLeft();
-          break;
-        case "d":
-          game.player.moveRight();
-          break;
-        case "s":
-          console.log("player 1 shot");
-          break;
-        case "ArrowLeft":
-          game.players[1].moveLeft();
-          break;
-        case "ArrowRight":
-          game.players[1].moveRight();
-          break;
-        case "ArrowUp":
-          console.log("player 2 shot");
-          break;
-      } //switch
+      game.player.move(event.key);
     }); // add event listener
 
     //Status refresh
     const refresh = setInterval(function () {
       game.refresh();
-    }, 30);
+    }, 10);
+    const animation = setInterval(function () {
+      game.ducks.animation();
+    }, 150);
   };
 
   buildStartScreen();

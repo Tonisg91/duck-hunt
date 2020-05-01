@@ -8,7 +8,7 @@ class Board {
   }
 
   buildBackground(players) {
-    this.score(players);
+    //   this.score(players);
   }
 
   score(players) {
@@ -16,14 +16,14 @@ class Board {
     const y = this.height * 0.1;
     this.ctx.fillStyle = "black";
 
-    if (!players) {
-      this.ctx.font = "30px Verdana";
-      this.ctx.fillText("SCORE: 0 ", x, y);
-      this.ctx.fillText(`TIME ${this.timer}`, x, y + 30);
-    } else {
-      this.ctx.font = "30px Verdana";
-      this.ctx.fillText("Player 1: 0", x, y);
-      this.ctx.fillText("Player 2: 0", x, y + 30);
-    }
+    // if (!players) {
+    //   this.ctx.font = "30px Verdana";
+    //   this.ctx.fillText("SCORE: 0 ", x, y);
+    //   this.ctx.fillText(`TIME ${this.timer}`, x, y + 30);
+    // } else {
+    //   this.ctx.font = "30px Verdana";
+    //   this.ctx.fillText("Player 1: 0", x, y);
+    //   this.ctx.fillText("Player 2: 0", x, y + 30);
+    // }
   }
 }

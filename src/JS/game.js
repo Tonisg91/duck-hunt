@@ -11,6 +11,7 @@ class Game {
     this.background.buildBackground();
     this.player.drawPlayer();
     this.ducks.drawDuck();
+    this.ducks.duckMovement();
   }
   refresh() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
