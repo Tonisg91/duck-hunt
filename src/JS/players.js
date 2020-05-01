@@ -9,24 +9,23 @@ class Player {
     this.position = this.canvas.width / 2;
   }
 
-  drawPlayer(position) {
+  drawPlayer() {
     this.ctx.fillRect(
-      this.position - position,
+      this.position,
       this.canvas.height - this.canvas.height * 0.15,
       this.sizeX,
       this.sizeY
     );
   }
   moveLeft() {
-    if (this.position > this.sizeX - 10) {
+    if (this.position > 0) {
       this.position -= 20;
-      console.log(1920 / 2);
     }
   }
   moveRight() {
     if (this.position < this.canvas.width - this.sizeX) {
       this.position += 20;
-      console.log(this.position);
     }
   }
+  shot() {}
 }

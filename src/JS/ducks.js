@@ -4,12 +4,12 @@ class Duck {
     this.ctx = this.canvas.getContext("2d");
     this.sizeX = 70;
     this.sizeY = 30;
-    this.startPositionX = [this.canvas.width - this.sizeX, 0];
+    this.startPositionX = this.canvas.width - this.sizeX;
   }
-  buildDuck() {
-    this.ctx.fillStyle = "green";
+  drawDuck() {
+    this.ctx.fillStyle = "black";
     this.ctx.fillRect(
-      this.canvas.width,
+      this.startPositionX,
       this.canvas.height - this.canvas.height * 0.2,
       this.sizeX,
       this.sizeY
