@@ -8,23 +8,6 @@ class Board {
   }
 
   buildBackground(players) {
-    const canvas = this.canvas;
-    const ctx = this.ctx;
-    let ground = new Image();
-    ground.src = "https://i.ibb.co/tP412GY/pixel-background-9121.png";
-    ground.onload = function () {
-      ctx.drawImage(ground, 0, 0);
-    };
-
-    //Blue zone (Sky) the rest 85%
-    // this.ctx.fillStyle = "lightblue";
-    // this.ctx.fillRect(
-    //   0, //X start
-    //   0, //Y start
-    //   this.width, //X finish
-    //   this.canvas.height //Y finish
-    // );
-
     this.score(players);
   }
 

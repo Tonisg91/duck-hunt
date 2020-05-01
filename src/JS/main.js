@@ -8,9 +8,9 @@ const main = () => {
     buildDom(
       `
                 <section class="startScreen">
-                    <h1>DUCK<br><span>HUNT</span></h1>
-                    <button id="one-player">1 Player</button>
-                    <button id="two-players">2 Players</button>
+                  <h1 id="duck">DUCK</h1>
+                  <h1 id="hunt">HUNT</h1>
+                  <button>START</button>
                 </section>
 
             `
@@ -30,13 +30,17 @@ const main = () => {
       //Controls for only Player
       buildDom(`
       <section class="showControls">
+      <h1>CONTROLS</h1>
         <div>
-          <h1>Player One</h1>
-          <h2>A</h2>
+          <h2 class="center">A</h2>
           <p>Move left</p>
-          <h2>S</h2>
+        </div>
+        <div>
+          <h2 class="center">S</h2>
           <p>Shoot trap</p>
-          <h2>D</h2>
+        </div>
+        <div>
+          <h2 class="center">D</h2>
           <p>Move Right</p>
         </div>
       </section>
@@ -46,7 +50,7 @@ const main = () => {
       buildDom(`
       <section class="showControls">
         <div>
-          <h1>Player One</h1>
+          <h1>Controls</h1>
           <h2>A</h2>
           <p>Move left</p>
           <h2>S</h2>
@@ -68,7 +72,7 @@ const main = () => {
     }
     setTimeout(function () {
       GameBoard(players);
-    }, 1000);
+    }, 5000);
   };
 
   const GameBoard = (playersNumber) => {

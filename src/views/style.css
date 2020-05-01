@@ -1,7 +1,61 @@
 body {
   margin: 0;
+  background-image: url("./images/pixel-background-9121.png");
+}
+main {
+  font-family: "Roboto", sans-serif;
+  font-family: "Press Start 2P", cursive;
 }
 .game-board {
   width: 100%;
   height: 100vh;
+}
+/* START SCREEN */
+.startScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5em 0;
+}
+.startScreen button {
+  font-family: "Press Start 2p";
+  padding: 2em 5em;
+  background: transparent;
+  border-radius: 25px;
+  border-color: black;
+}
+.startScreen h1 {
+  margin-bottom: 0;
+  font-size: 10em;
+
+  background: -webkit-linear-gradient(#799f0c, #ffe000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#duck {
+  -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(18deg, 0deg);
+  -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(18deg, 0deg);
+  -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(18deg, 0deg);
+  -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(18deg, 0deg);
+}
+#hunt {
+  margin-top: 0;
+  -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-15deg, 0deg);
+  -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px)
+    skew(-15deg, 0deg);
+  -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-15deg, 0deg);
+  -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-15deg, 0deg);
+}
+
+/* INTRUCTIONS */
+.showControls {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.center {
+  text-align: center;
 }
