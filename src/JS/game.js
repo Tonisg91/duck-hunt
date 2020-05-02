@@ -3,7 +3,7 @@ class Game {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.player = new Player(this.canvas);
-    this.ducks = new Duck(this.canvas);
+    this.ducks = [];
     this.background = new Board(this.canvas);
     this.shot = [];
   }
@@ -11,8 +11,12 @@ class Game {
   draw() {
     this.background.score();
     this.player.drawPlayer();
-    this.ducks.drawDuck();
-    this.ducks.duckMovement();
+    if (this.ducks) {
+      this.ducks.forEach((e) => {
+        e.drawDuck();
+        e.duckMovement();
+      });
+    }
     this.shot.forEach((e) => {
       e.shotMove();
       e.drawShot();
@@ -26,15 +30,16 @@ class Game {
   } //refresh()
 
   startCrono() {
-    if (!this.background.timer) {
-      return "endgame";
+    if (this.background.timer === 0) {
+      return true;
     } else {
       this.background.timer -= 1;
     }
+    return false;
   } //startCrono()
 
   createDucks() {
-    this.ducks.push(new Duck(this.canvas, 1));
+    this.ducks.push(new Duck(this.canvas));
   } //createDucks()
 
   createShot() {
@@ -63,8 +68,14 @@ class Game {
     for (let i = 0; i < this.shot.length; i++) {
       let bulletX = this.shot[i].x;
       let bulletY = this.shot[i].y;
-      console.log(bulletX, "X");
-      console.log(bulletY, "Y");
-    }
+      for (let d = 0; d < this.ducks.length; d++) {
+        let duckX = this.ducks[d].x;
+        let duckY = this.ducks[d].y;
+
+        if (bulletX === duckX && bulletY === duckY) {
+          console.log("collision");
+        }
+      } //2nd for
+    } // 1st for
   }
 }

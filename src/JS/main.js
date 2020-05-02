@@ -98,11 +98,6 @@ const main = () => {
     const game = new Game(canvasElement);
     setTimeout(game.draw, 500);
 
-    //Timer coundtown
-    const timer = setInterval(function () {
-      game.startCrono();
-    }, 1000);
-
     //Movement and shot key listener
     document.addEventListener("keydown", (event) => {
       game.move(event.key);
@@ -112,14 +107,23 @@ const main = () => {
     const refresh = setInterval(function () {
       game.refresh();
     }, 10);
+    const createDuck = setInterval(function () {
+      game.createDucks();
+    }, 3000);
 
     const animation = setInterval(function () {
-      game.ducks.animation();
+      game.ducks.forEach((e) => e.animation());
     }, 150);
 
-    if (game.startCrono() === "endgame") {
-      clearInterval(refresh, timer, animation);
-    }
+    //Timer coundtown
+    const timer = setInterval(function () {
+      game.startCrono();
+      if (game.startCrono()) {
+        clearInterval(timer);
+        clearInterval(createDuck);
+        clearInterval(refresh);
+      }
+    }, 1000);
   };
 
   buildStartScreen();
