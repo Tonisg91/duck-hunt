@@ -72,7 +72,7 @@ const main = () => {
     }
     setTimeout(function () {
       GameBoard(players);
-    }, 5000);
+    }, 1000);
   };
 
   const GameBoard = (playersNumber) => {
@@ -92,12 +92,11 @@ const main = () => {
     //CANVAS END
 
     const backGround = new Board(canvasElement);
-    backGround.buildBackground(playersNumber);
-    backGround.score(playersNumber);
+    backGround.score();
 
     //Create new Game
     const game = new Game(canvasElement);
-    game.draw();
+    setTimeout(game.draw, 500);
 
     //Timer coundtown
     const timer = setInterval(function () {
@@ -106,16 +105,21 @@ const main = () => {
 
     //Movement and shot key listener
     document.addEventListener("keydown", (event) => {
-      game.player.move(event.key);
+      game.move(event.key);
     }); // add event listener
 
     //Status refresh
     const refresh = setInterval(function () {
       game.refresh();
     }, 10);
+
     const animation = setInterval(function () {
       game.ducks.animation();
     }, 150);
+
+    if (game.startCrono() === "endgame") {
+      clearInterval(refresh, timer, animation);
+    }
   };
 
   buildStartScreen();

@@ -2,9 +2,7 @@ class Duck {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
-    this.sizeX = 70;
-    this.sizeY = 30;
-    this.startPositionX = this.canvas.width - this.sizeX - 100;
+    this.startPositionX = this.canvas.width - 170;
     this.startPositionY = this.canvas.height - this.canvas.height * 0.3;
     this.xMovement = 6;
     this.yMovement = 1;
