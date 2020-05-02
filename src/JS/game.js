@@ -3,9 +3,9 @@ class Game {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.player = new Player(this.canvas);
-    this.ducks = [];
+    this.ducks = [new Duck(this.canvas)];
     this.background = new Board(this.canvas);
-    this.shot = [];
+    this.shots = [];
   }
 
   draw() {
@@ -17,15 +17,16 @@ class Game {
         e.duckMovement();
       });
     }
-    this.shot.forEach((e) => {
+    this.shots.forEach((e) => {
       e.shotMove();
       e.drawShot();
     });
+    this.eraseElements();
+    this.checkCollision();
   } //draw()
 
   refresh() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.checkCollision();
     this.draw();
   } //refresh()
 
@@ -43,7 +44,7 @@ class Game {
   } //createDucks()
 
   createShot() {
-    this.shot.push(new Shot(this.player.position, this.canvas));
+    this.shots.push(new Shot(this.player.position, this.canvas));
   } //createShot()
 
   move(event) {
@@ -64,18 +65,41 @@ class Game {
     }
   } //move()
 
-  checkCollision() {
-    for (let i = 0; i < this.shot.length; i++) {
-      let bulletX = this.shot[i].x;
-      let bulletY = this.shot[i].y;
-      for (let d = 0; d < this.ducks.length; d++) {
-        let duckX = this.ducks[d].x;
-        let duckY = this.ducks[d].y;
+  eraseElements() {
+    this.shots.forEach((elem, idx) => {
+      if (elem.y <= -elem.sizeY) {
+        this.shots.splice(idx, 1);
+      }
+    });
+    this.ducks.forEach((elem, idx) => {
+      if (elem.y <= -500) {
+        this.ducks.splice(idx, 1);
+      }
+    });
+  } //eraseElements
 
-        if (bulletX === duckX && bulletY === duckY) {
-          console.log("collision");
+  checkCollision() {
+    this.shots.forEach((bullet, bIdx) => {
+      let bulletX = parseInt(bullet.x);
+      let bulletY = parseInt(bullet.y);
+
+      this.ducks.forEach((duck, dIdx) => {
+        let duckX = parseInt(duck.x);
+        let duckY = parseInt(duck.y);
+        let duckEndX = duckX + 60;
+        let duckEndY = duckY + 90;
+
+        if (
+          bulletX > duckX &&
+          bulletX < duckEndX &&
+          bulletY > duckY &&
+          bulletY < duckEndY
+        ) {
+          this.shots.splice(bIdx, 1);
+          this.ducks.splice(dIdx, 1);
+          this.background.points += 25;
         }
-      } //2nd for
-    } // 1st for
-  }
+      });
+    });
+  } //checkCollision
 }

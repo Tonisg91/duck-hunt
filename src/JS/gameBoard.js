@@ -4,7 +4,8 @@ class Board {
     this.ctx = this.canvas.getContext("2d");
     this.width = this.canvas.width; //1200px
     this.height = this.canvas.height; // 700px
-    this.timer = 10;
+    this.timer = 120;
+    this.points = 0;
   }
 
   score() {
@@ -14,7 +15,7 @@ class Board {
 
     if (this.timer) {
       this.ctx.font = "30px Verdana";
-      this.ctx.fillText("SCORE: 0 ", x, y);
+      this.ctx.fillText(`SCORE: ${this.points} `, x, y);
       this.ctx.fillText(`TIME ${this.timer}`, x, y + 30);
     }
   }

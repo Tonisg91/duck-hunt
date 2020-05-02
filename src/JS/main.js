@@ -110,7 +110,6 @@ const main = () => {
     const createDuck = setInterval(function () {
       game.createDucks();
     }, 3000);
-
     const animation = setInterval(function () {
       game.ducks.forEach((e) => e.animation());
     }, 150);
@@ -118,14 +117,13 @@ const main = () => {
     //Timer coundtown
     const timer = setInterval(function () {
       game.startCrono();
-      if (game.startCrono()) {
-        clearInterval(timer);
-        clearInterval(createDuck);
-        clearInterval(refresh);
-      }
+      // if (game.startCrono()) {
+      //   clearInterval(timer);
+      //   clearInterval(createDuck);
+      //   clearInterval(refresh);
+      // }
     }, 1000);
   };
-
   buildStartScreen();
 }; // main closing
 
