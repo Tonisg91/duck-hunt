@@ -10,7 +10,6 @@ class Player {
   }
 
   drawPlayer() {
-    const canvas = this.canvas;
     const ctx = this.ctx;
     const xPosition = this.position;
     const yPosition = this.y;

@@ -14,7 +14,7 @@ class Board {
     this.ctx.fillStyle = "black";
 
     if (this.timer) {
-      this.ctx.font = "30px Verdana";
+      this.ctx.font = "30px Press Start 2P";
       this.ctx.fillText(`SCORE: ${this.points} `, x, y);
       this.ctx.fillText(`TIME ${this.timer}`, x, y + 30);
     }
