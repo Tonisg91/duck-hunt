@@ -3,7 +3,7 @@ const main = () => {
     const main = document.querySelector("main");
     main.innerHTML = html;
   };
-
+  let points;
   function buildStartScreen() {
     buildDom(
       `
@@ -42,7 +42,7 @@ const main = () => {
   `);
     setTimeout(function () {
       GameBoard();
-    }, 1000);
+    }, 5000);
   };
 
   const GameBoard = () => {
@@ -61,12 +61,8 @@ const main = () => {
     canvasElement.setAttribute("height", height);
     //CANVAS END
 
-    const backGround = new Board(canvasElement);
-    backGround.score();
-
     //Create new Game
     const game = new Game(canvasElement);
-    setTimeout(game.draw, 500);
 
     //Movement and shot key listener
     document.addEventListener("keydown", (event) => {
@@ -86,9 +82,24 @@ const main = () => {
 
     //Timer coundtown
     const timer = setInterval(function () {
-      game.startCrono();
+      game.timerOn();
+      if (game.timer === 0) {
+        clearInterval(refresh);
+        clearInterval(createDuck);
+        points = game.points;
+        endGame();
+      }
     }, 1000);
   };
+
+  const endGame = () => {
+    buildDom(`
+      <section id="endGame">
+        <h1>Points: ${points}</h1>
+      </section>
+    `);
+  };
+
   buildStartScreen();
 }; // main closing
 

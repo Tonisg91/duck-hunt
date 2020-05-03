@@ -4,12 +4,24 @@ class Game {
     this.ctx = this.canvas.getContext("2d");
     this.player = new Player(this.canvas);
     this.ducks = [new Duck(this.canvas)];
-    this.background = new Board(this.canvas);
     this.shots = [];
+    this.timer = 10;
+    this.points = 0;
   }
-
+  drawAll() {
+    const loop = () => {
+      if (Math.random() > 0.99) {
+        this.ducks.push(new Duck(this.canvas));
+      }
+      this.refresh();
+      if (this.timer) {
+        window.requestAnimationFrame(loop);
+      }
+    };
+    window.requestAnimationFrame(loop);
+  }
   draw() {
-    this.background.score();
+    this.score();
     this.player.drawPlayer();
     if (this.ducks) {
       this.ducks.forEach((e) => {
@@ -29,15 +41,6 @@ class Game {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.draw();
   } //refresh()
-
-  startCrono() {
-    if (this.background.timer === 0) {
-      return true;
-    } else {
-      this.background.timer -= 1;
-    }
-    return false;
-  } //startCrono()
 
   createDucks() {
     this.ducks.push(new Duck(this.canvas));
@@ -97,9 +100,27 @@ class Game {
         ) {
           this.shots.splice(bIdx, 1);
           this.ducks.splice(dIdx, 1);
-          this.background.points += 25;
+          this.points += 25;
         }
       });
     });
   } //checkCollision
+
+  score() {
+    const x = this.canvas.width - this.canvas.width * 0.15;
+    const y = this.canvas.height * 0.1;
+    this.ctx.fillStyle = "black";
+
+    if (this.timer) {
+      this.ctx.font = "30px Courier New";
+      this.ctx.fillText(`SCORE: ${this.points} `, x, y);
+      this.ctx.fillText(`TIME ${this.timer}`, x, y + 30);
+    }
+  }
+
+  timerOn() {
+    if (this.timer > 0) {
+      this.timer -= 1;
+    }
+  }
 }
