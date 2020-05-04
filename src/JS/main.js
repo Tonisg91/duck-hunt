@@ -3,17 +3,20 @@ const main = () => {
     const main = document.querySelector("main");
     main.innerHTML = html;
   };
+
   let points;
+
   function buildStartScreen() {
     buildDom(
       `
-                <section class="startScreen">
-                  <h1 id="duck">DUCK</h1>
-                  <h1 id="hunt">HUNT</h1>
-                  <button>START</button>
-                </section>
-
-            `
+        <section class="startScreen">
+          <h1 id="duck">DUCK</h1>
+          <h1 id="hunt">HUNT</h1>
+          <button>START</button>
+          <audio src="/src/sounds/01 - Title Screen.ogg"  autoplay>
+          </audio>
+        </section>
+    `
     ); //buildDom
 
     const startButton = document.querySelector("button");
@@ -23,29 +26,32 @@ const main = () => {
   const showControls = () => {
     buildDom(`
     <section class="go-center">
-    <h1>CONTROLS</h1>
-      <div>
-        <h2 class="text-center">A</h2>
-        <p>Move left</p>
-      </div>
-      <div>
-        <h2 class="text-center">S</h2>
-        <p>Shot</p>
-      </div>
-      <div>
-        <h2 class="text-center">D</h2>
-        <p>Move Right</p>
-      </div>
+      <h1>CONTROLS</h1>
+        <div>
+          <h2 class="text-center">A</h2>
+          <p>Move left</p>
+        </div>
+        <div>
+          <h2 class="text-center">S</h2>
+          <p>Shot</p>
+        </div>
+        <div>
+          <h2 class="text-center">D</h2>
+          <p>Move Right</p>
+        </div>
+        <audio src="/src/sounds/Duck Hunt Intro.ogg" autoplay></audio>
     </section>
   `);
-    setTimeout(gameBoard, 5000);
-  };
+    setTimeout(gameBoard, 6000);
+  }; //showControls
 
   const gameBoard = () => {
     buildDom(`
-             <section class="game-board">
-                 <canvas></canvas>
-             </section>
+              <section class="game-board">
+                  <canvas></canvas>
+              </section>
+              <audio src="/src/sounds/99 - Counting Hits (SFX).ogg" id="shot"></audio>
+              <audio src="/src/sounds/99 - Gunshot (SFX).ogg" id="gunshot"></audio>
          `); //buildDom
     //CANVAS START
     const width = document.querySelector(".game-board").offsetWidth;
@@ -60,10 +66,9 @@ const main = () => {
     //Create new Game
     const game = new Game(canvasElement);
 
-    //Movement and shot key listener
     document.addEventListener("keydown", (event) => {
       game.move(event.key);
-    }); // add event listener
+    });
 
     //Status refresh
     const refresh = setInterval(function () {
@@ -72,7 +77,7 @@ const main = () => {
     }, 10);
     const createDuck = setInterval(function () {
       game.createDucks();
-    }, 2500);
+    }, 2000);
     const animation = setInterval(function () {
       game.ducks.forEach((e) => e.animation());
     }, 150);
@@ -80,26 +85,50 @@ const main = () => {
     //Timer coundtown
     const timer = setInterval(function () {
       game.timerOn();
-      if (game.timer === 0) {
+
+      const clearAll = () => {
         clearInterval(createDuck);
         clearInterval(refresh);
         clearInterval(animation);
         points = game.points;
         clearInterval(timer);
+      };
+
+      if (!game.timer) {
+        clearAll();
         endGame();
+      }
+      if (game.lives <= 0) {
+        clearAll();
+        endGame(1);
       }
     }, 1000);
   }; //GameBoard
 
-  const endGame = () => {
-    buildDom(`
+  const endGame = (endType) => {
+    const predefinedMessage = `
+    <h1>Points: ${points}</h1>
+    <button>RETRY</button>
+    <br/>
+    <button>HOME</button>
+    `;
+
+    if (endType) {
+      buildDom(`
       <section id="endGame" class="go-center">
-        <h1>Points: ${points}</h1>
-        <button>Retry</button>
-        <br/>
-        <button>Home</button>
+        <h1>GAME OVER</h1>
+        ${predefinedMessage}
+        <audio src="/src/sounds/08 - Game Over.ogg" autoplay></audio>
       </section>
     `);
+    } else {
+      buildDom(`
+      <section id="endGame" class="go-center">
+        ${predefinedMessage}
+        <audio src="/src/sounds/05 - Round Clear.ogg" autoplay></audio>
+      </section>
+    `);
+    }
 
     const retry = document.querySelectorAll("button");
     retry[0].addEventListener("click", gameBoard);

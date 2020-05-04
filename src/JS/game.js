@@ -44,6 +44,7 @@ class Game {
 
   createShot() {
     this.shots.push(new Shot(this.player.position, this.canvas));
+    document.getElementById("gunshot").play();
   } //createShot()
 
   createPoo() {
@@ -108,6 +109,7 @@ class Game {
         ) {
           this.shots.splice(bIdx, 1);
           this.ducks.splice(dIdx, 1);
+          document.getElementById("shot").play();
           this.points += 25;
         }
       });
@@ -116,26 +118,19 @@ class Game {
     this.poo.forEach((poo, pIdx) => {
       let pooX = parseInt(poo.x);
       let pooY = parseInt(poo.y);
-      let pooSize = pooY + poo.sizeY;
+      let pooSizeY = pooY + poo.sizeY;
+      let pooSizeX = pooX + poo.sizeX;
 
       let playerX = parseInt(this.player.position);
       let playerEndX = playerX + this.player.sizeX;
       let playerY = parseInt(this.player.y);
-      let playerEndY = playerY - this.player.sizeY;
 
-      if (pooX > playerX && pooX < playerEndX && pooSize >= playerY) {
+      if (pooX > playerX - 5 && pooSizeX < playerEndX && pooSizeY >= playerY) {
         this.poo.splice(pIdx, 1);
         this.lives -= 1;
-        this.checkLives();
       }
     });
   } //checkCollision
-
-  checkLives() {
-    if (!this.lives) {
-      this.timer = 0;
-    }
-  }
 
   score() {
     const x = this.canvas.width - this.canvas.width * 0.15;
