@@ -4,7 +4,6 @@ class Player {
     this.ctx = this.canvas.getContext("2d");
     this.sizeX = 30;
     this.sizeY = 50;
-    this.x = this.canvas.width / 2;
     this.y = this.canvas.height - this.canvas.height * 0.15;
     this.position = this.canvas.width / 2;
   }

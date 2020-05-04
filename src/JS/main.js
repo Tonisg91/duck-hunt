@@ -68,10 +68,11 @@ const main = () => {
     //Status refresh
     const refresh = setInterval(function () {
       game.refresh();
+      game.createPoo();
     }, 10);
     const createDuck = setInterval(function () {
       game.createDucks();
-    }, 3000);
+    }, 2500);
     const animation = setInterval(function () {
       game.ducks.forEach((e) => e.animation());
     }, 150);

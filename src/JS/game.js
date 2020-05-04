@@ -5,24 +5,20 @@ class Game {
     this.player = new Player(this.canvas);
     this.ducks = [new Duck(this.canvas)];
     this.shots = [];
-    this.timer = 10;
+    this.poo = [];
+    this.timer = 100;
     this.points = 0;
-  }
-  drawAll() {
-    const loop = () => {
-      if (Math.random() > 0.99) {
-        this.ducks.push(new Duck(this.canvas));
-      }
-      this.refresh();
-      if (this.timer) {
-        window.requestAnimationFrame(loop);
-      }
-    };
-    window.requestAnimationFrame(loop);
+    this.lives = 3;
   }
   draw() {
     this.score();
     this.player.drawPlayer();
+    if (this.poo) {
+      this.poo.forEach((e) => {
+        e.drawPoo();
+        e.pooMove();
+      });
+    }
     if (this.ducks) {
       this.ducks.forEach((e) => {
         e.drawDuck();
@@ -50,6 +46,12 @@ class Game {
     this.shots.push(new Shot(this.player.position, this.canvas));
   } //createShot()
 
+  createPoo() {
+    let randomDuck = this.ducks[Math.floor(Math.random() * this.ducks.length)];
+    if (Math.random() > 0.99) {
+      this.poo.push(new Poo(randomDuck.x, randomDuck.y, this.canvas));
+    }
+  }
   move(event) {
     switch (event) {
       case "a":
@@ -75,13 +77,19 @@ class Game {
       }
     });
     this.ducks.forEach((elem, idx) => {
-      if (elem.y <= -500) {
+      if (elem.y <= -200) {
         this.ducks.splice(idx, 1);
+      }
+    });
+    this.poo.forEach((elem, idx) => {
+      if (elem.y > this.canvas.height + 50) {
+        this.poo.splice(idx, 1);
       }
     });
   } //eraseElements
 
   checkCollision() {
+    //shots and ducks
     this.shots.forEach((bullet, bIdx) => {
       let bulletX = parseInt(bullet.x);
       let bulletY = parseInt(bullet.y);
@@ -104,7 +112,30 @@ class Game {
         }
       });
     });
+    // poo and player
+    this.poo.forEach((poo, pIdx) => {
+      let pooX = parseInt(poo.x);
+      let pooY = parseInt(poo.y);
+      let pooSize = pooY + poo.sizeY;
+
+      let playerX = parseInt(this.player.position);
+      let playerEndX = playerX + this.player.sizeX;
+      let playerY = parseInt(this.player.y);
+      let playerEndY = playerY - this.player.sizeY;
+
+      if (pooX > playerX && pooX < playerEndX && pooSize >= playerY) {
+        this.poo.splice(pIdx, 1);
+        this.lives -= 1;
+        this.checkLives();
+      }
+    });
   } //checkCollision
+
+  checkLives() {
+    if (!this.lives) {
+      this.timer = 0;
+    }
+  }
 
   score() {
     const x = this.canvas.width - this.canvas.width * 0.15;
@@ -114,7 +145,8 @@ class Game {
     if (this.timer) {
       this.ctx.font = "30px Courier New";
       this.ctx.fillText(`SCORE: ${this.points} `, x, y);
-      this.ctx.fillText(`TIME ${this.timer}`, x, y + 30);
+      this.ctx.fillText(`TIME: ${this.timer}`, x, y + 30);
+      this.ctx.fillText(`LIVES: ${this.lives}`, x, y + 60);
     }
   }
 
