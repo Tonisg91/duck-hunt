@@ -16,36 +16,32 @@ const main = () => {
             `
     ); //buildDom
 
-    const startButtons = document.querySelectorAll("button");
-    startButtons[0].addEventListener("click", function () {
-      showControls(0);
-    });
+    const startButton = document.querySelector("button");
+    startButton.addEventListener("click", showControls);
   } // buildStartScreen
 
   const showControls = () => {
     buildDom(`
-    <section class="showControls">
+    <section class="go-center">
     <h1>CONTROLS</h1>
       <div>
-        <h2 class="center">A</h2>
+        <h2 class="text-center">A</h2>
         <p>Move left</p>
       </div>
       <div>
-        <h2 class="center">S</h2>
+        <h2 class="text-center">S</h2>
         <p>Shot</p>
       </div>
       <div>
-        <h2 class="center">D</h2>
+        <h2 class="text-center">D</h2>
         <p>Move Right</p>
       </div>
     </section>
   `);
-    setTimeout(function () {
-      GameBoard();
-    }, 5000);
+    setTimeout(gameBoard, 5000);
   };
 
-  const GameBoard = () => {
+  const gameBoard = () => {
     buildDom(`
              <section class="game-board">
                  <canvas></canvas>
@@ -84,21 +80,30 @@ const main = () => {
     const timer = setInterval(function () {
       game.timerOn();
       if (game.timer === 0) {
-        clearInterval(refresh);
         clearInterval(createDuck);
+        clearInterval(refresh);
+        clearInterval(animation);
         points = game.points;
+        clearInterval(timer);
         endGame();
       }
     }, 1000);
-  };
+  }; //GameBoard
 
   const endGame = () => {
     buildDom(`
-      <section id="endGame">
+      <section id="endGame" class="go-center">
         <h1>Points: ${points}</h1>
+        <button>Retry</button>
+        <br/>
+        <button>Home</button>
       </section>
     `);
-  };
+
+    const retry = document.querySelectorAll("button");
+    retry[0].addEventListener("click", gameBoard);
+    retry[1].addEventListener("click", buildStartScreen);
+  }; //endGame
 
   buildStartScreen();
 }; // main closing
