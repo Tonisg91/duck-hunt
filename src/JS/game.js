@@ -6,13 +6,14 @@ class Game {
     this.ducks = [new Duck(this.canvas)];
     this.shots = [];
     this.poo = [];
-    this.timer = 100;
+    this.timer = 60;
     this.points = 0;
     this.lives = 3;
   }
   draw() {
     this.score();
     this.player.drawPlayer();
+    this.eraseElements();
     if (this.poo) {
       this.poo.forEach((e) => {
         e.drawPoo();
@@ -25,11 +26,12 @@ class Game {
         e.duckMovement();
       });
     }
-    this.shots.forEach((e) => {
-      e.shotMove();
-      e.drawShot();
-    });
-    this.eraseElements();
+    if (this.shots) {
+      this.shots.forEach((e) => {
+        e.shotMove();
+        e.drawShot();
+      });
+    }
     this.checkCollision();
   } //draw()
 
@@ -117,15 +119,13 @@ class Game {
     // poo and player
     this.poo.forEach((poo, pIdx) => {
       let pooX = parseInt(poo.x);
-      let pooY = parseInt(poo.y);
-      let pooSizeY = pooY + poo.sizeY;
-      let pooSizeX = pooX + poo.sizeX;
+      let pooY = parseInt(poo.y + poo.sizeY);
 
       let playerX = parseInt(this.player.position);
-      let playerEndX = playerX + this.player.sizeX;
+      let playerEndX = playerX + this.player.sizeX * 2.5;
       let playerY = parseInt(this.player.y);
 
-      if (pooX > playerX - 5 && pooSizeX < playerEndX && pooSizeY >= playerY) {
+      if (pooX > playerX - 5 && pooX < playerEndX && pooY >= playerY) {
         this.poo.splice(pIdx, 1);
         this.lives -= 1;
       }

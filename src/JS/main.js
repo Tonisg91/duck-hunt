@@ -74,7 +74,7 @@ const main = () => {
     const refresh = setInterval(function () {
       game.refresh();
       game.createPoo();
-    }, 10);
+    }, 15);
     const createDuck = setInterval(function () {
       game.createDucks();
     }, 2000);
@@ -107,7 +107,8 @@ const main = () => {
 
   const endGame = (endType) => {
     const predefinedMessage = `
-    <h1>Points: ${points}</h1>
+    <h1>SCORE: ${points}</h1>
+    <br/>
     <button>RETRY</button>
     <br/>
     <button>HOME</button>

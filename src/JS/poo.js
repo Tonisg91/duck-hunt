@@ -3,7 +3,7 @@ class Poo {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.sizeX = 10;
-    this.sizeY = 50;
+    this.sizeY = 30;
     this.x = positionX;
     this.y = positionY;
   }

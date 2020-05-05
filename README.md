@@ -6,9 +6,9 @@
 
 Mi primer juego consiste en un escenario fijo en el que van apareciendo patos y debemos cazarlos.
 
-Es para uno o dos jugadores.
+Ellos pueden eliminarnos "disparando" tambien.
 
-En el caso de haber dos jugadores, podremos seleccionar un modo de juego entre cooperativo o competitivo.
+Hay que tratar de conseguir el mayor numero de puntos en el tiempo estipulado.
 
 ## Reglas del juego
 
@@ -16,12 +16,15 @@ Cada pato cazado aumentará los puntos acumulados.
 
 El objetivo es conseguir el mayor numero de puntos en el tiempo predeterminado.
 
-La forma de cazar los patos será colocar a nuestro personaje debajo del pato y utilizar una tecla definida para lanzar una red hacia arriba.
+La forma de cazar los patos será colocar a nuestro personaje debajo del pato y utilizar una tecla definida para disparar hacia arriba.
 
 ## MVP - User stories
 
-- Los patos deben salir de manera aleatoria.
-- Debe haber un temporizador visible.
-- Se debe poder hacer una partida completa al menos con un jugador.
+- Las balas del jugador y de los patos deben ser iconos representativos.
+- Cuando se acierta a un pato, su asset tiene que cambiar.
+- Deberia poder ver la puntuacion almacenada en localstorage al finalizar cada partida.
 
 ## Backlog
+
+- Agregar diferentes tipos de patos.
+- Sustituir setInterval por requestAnimationFrame.

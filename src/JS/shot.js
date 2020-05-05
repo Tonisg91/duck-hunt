@@ -9,12 +9,16 @@ class Shot {
   }
 
   drawShot() {
-    this.ctx.beginPath();
-    this.ctx.fillStyle = "black";
-    this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
-    this.ctx.stroke();
+    const ctx = this.ctx;
+    const x = this.x;
+    const y = this.y;
+    const bulletImg = new Image();
+    bulletImg.src = "/src/views/images/weapons.svg";
+    bulletImg.onload = function () {
+      ctx.drawImage(bulletImg, x, y, 30, 30);
+    };
   }
   shotMove() {
-    this.y -= 4;
+    this.y -= 8;
   }
 }

@@ -13,9 +13,9 @@ class Player {
     const xPosition = this.position;
     const yPosition = this.y;
     const playerImg = new Image();
-    playerImg.src = "https://i.ibb.co/zbq4PR7/idle.gif";
+    playerImg.src = "/src/views/images/player.gif";
     playerImg.onload = function () {
       ctx.drawImage(playerImg, xPosition, yPosition, 90, 135);
     };
-  } //drawPlayer Method
+  }
 }

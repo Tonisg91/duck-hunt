@@ -5,14 +5,14 @@ class Duck {
     this.randomSide = [this.canvas.width - 170, 100];
     this.x = this.randomSide[Math.floor(Math.random() * 2)];
     this.y = this.canvas.height - this.canvas.height * 0.3;
-    this.xMovement = 6;
+    this.xMovement = 8;
     this.yMovement = 1;
     this.duckImg = new Image();
     this.imgArr = [
-      "https://i.ibb.co/dJWhHjT/duckhunt-1.png",
-      "https://i.ibb.co/RDNb3RL/duckhunt-2.png",
-      "https://i.ibb.co/pd326wX/duckhunt-3.png",
-      "https://i.ibb.co/XsG1F9B/duckhunt-4.png",
+      "/src/views/images/duckhunt_1.png",
+      "/src/views/images/duckhunt_2.png",
+      "/src/views/images/duckhunt_3.png",
+      "/src/views/images/duckhunt_4.png",
     ];
     this.imgSrc = this.imgArr[3];
   }
