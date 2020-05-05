@@ -8,7 +8,7 @@ class Player {
     this.position = this.canvas.width / 2;
   }
 
-  drawPlayer() {
+  draw() {
     const ctx = this.ctx;
     const xPosition = this.position;
     const yPosition = this.y;

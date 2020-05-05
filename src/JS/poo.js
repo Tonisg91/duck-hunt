@@ -8,13 +8,13 @@ class Poo {
     this.y = positionY;
   }
 
-  drawPoo() {
+  draw() {
     this.ctx.beginPath();
     this.ctx.fillStyle = "white";
     this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
     this.ctx.stroke();
   }
-  pooMove() {
+  move() {
     this.y += 4;
   }
 }

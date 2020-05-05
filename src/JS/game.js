@@ -12,28 +12,25 @@ class Game {
   }
   draw() {
     this.score();
-    this.player.drawPlayer();
     this.eraseElements();
-    if (this.poo) {
-      this.poo.forEach((e) => {
-        e.drawPoo();
-        e.pooMove();
-      });
-    }
-    if (this.ducks) {
-      this.ducks.forEach((e) => {
-        e.drawDuck();
-        e.duckMovement();
-      });
-    }
-    if (this.shots) {
-      this.shots.forEach((e) => {
-        e.shotMove();
-        e.drawShot();
-      });
-    }
+    this.drawElements();
     this.checkCollision();
   } //draw()
+
+  drawElements() {
+    const drawAll = (array) => {
+      if (array) {
+        array.forEach((e) => {
+          e.draw();
+          e.move();
+        });
+      }
+    };
+    this.player.draw();
+    drawAll(this.poo);
+    drawAll(this.ducks);
+    drawAll(this.shots);
+  }
 
   refresh() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -50,11 +47,16 @@ class Game {
   } //createShot()
 
   createPoo() {
-    let randomDuck = this.ducks[Math.floor(Math.random() * this.ducks.length)];
-    if (Math.random() > 0.99) {
-      this.poo.push(new Poo(randomDuck.x, randomDuck.y, this.canvas));
+    if (this.ducks) {
+      let randomDuck = this.ducks[
+        Math.floor(Math.random() * this.ducks.length)
+      ];
+      if (Math.random() > 0.99) {
+        this.poo.push(new Poo(randomDuck.x, randomDuck.y, this.canvas));
+      }
     }
-  }
+  } //createPoo
+
   move(event) {
     switch (event) {
       case "a":
@@ -71,24 +73,19 @@ class Game {
         }
         break;
     }
-  } //move()
+  } //move
 
   eraseElements() {
-    this.shots.forEach((elem, idx) => {
-      if (elem.y <= -elem.sizeY) {
-        this.shots.splice(idx, 1);
-      }
-    });
-    this.ducks.forEach((elem, idx) => {
-      if (elem.y <= -200) {
-        this.ducks.splice(idx, 1);
-      }
-    });
-    this.poo.forEach((elem, idx) => {
-      if (elem.y > this.canvas.height + 50) {
-        this.poo.splice(idx, 1);
-      }
-    });
+    const erase = (array) => {
+      array.forEach((elem) => {
+        if (elem.y <= -elem.sizeY || elem.y >= this.canvas.height) {
+          array.shift();
+        }
+      });
+    };
+    erase(this.ducks);
+    erase(this.shots);
+    erase(this.poo);
   } //eraseElements
 
   checkCollision() {
@@ -110,9 +107,9 @@ class Game {
           bulletY < duckEndY
         ) {
           this.shots.splice(bIdx, 1);
-          this.ducks.splice(dIdx, 1);
           document.getElementById("shot").play();
           this.points += 25;
+          this.ducks.splice(dIdx, 1);
         }
       });
     });
@@ -143,11 +140,11 @@ class Game {
       this.ctx.fillText(`TIME: ${this.timer}`, x, y + 30);
       this.ctx.fillText(`LIVES: ${this.lives}`, x, y + 60);
     }
-  }
+  } //score
 
   timerOn() {
     if (this.timer > 0) {
       this.timer -= 1;
     }
-  }
+  } //score
 }
