@@ -21,16 +21,11 @@ La forma de cazar los patos será colocar a nuestro personaje debajo del pato y 
 ## MVP - User stories
 
 - Las balas del jugador y de los patos deben ser iconos representativos.
-<<<<<<< HEAD
 - Cuando se acierta a un pato, su asset tiene que cambiar.
 - Deberia poder ver la puntuacion almacenada en localstorage al finalizar cada partida.
 
 ## Backlog
 
-=======
 - Deberia poder ver la puntuacion almacenada en localstorage al finalizar cada partida.
-
-## Backlog
->>>>>>> 8426f5849677004cc06df98b8524342f940ba69f
 - Agregar diferentes tipos de patos.
 - Sustituir setInterval por requestAnimationFrame.
