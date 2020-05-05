@@ -15,7 +15,7 @@ class Shot {
     const sizeX = this.sizeX;
     const sizeY = this.sizeY;
     const bulletImg = new Image();
-    bulletImg.src = "../views/images/bullet.svg";
+    bulletImg.src = "/views/images/bullet.svg";
     bulletImg.onload = function () {
       ctx.drawImage(bulletImg, x, y, sizeX, sizeY);
     };

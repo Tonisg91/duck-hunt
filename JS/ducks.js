@@ -10,11 +10,11 @@ class Duck {
     this.xMovement = 8;
     this.yMovement = 1;
     this.imgArr = [
-      "../views/images/duckhunt_1.png",
-      "../views/images/duckhunt_2.png",
-      "../views/images/duckhunt_3.png",
-      "../views/images/duckhunt_4.png",
-      "../views/images/explosion.svg",
+      "/views/images/duckhunt_1.png",
+      "/views/images/duckhunt_2.png",
+      "/views/images/duckhunt_3.png",
+      "/views/images/duckhunt_4.png",
+      "/views/images/explosion.svg",
     ];
     this.imgSrc = this.imgArr[3];
   }
