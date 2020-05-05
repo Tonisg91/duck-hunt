@@ -15,7 +15,7 @@ class Player {
     const sizeX = this.sizeX;
     const sizeY = this.sizeY;
     const playerImg = new Image();
-    playerImg.src = "../views/images/player.gif";
+    playerImg.src = "../views/images/player.png";
     playerImg.onload = function () {
       ctx.drawImage(playerImg, xPosition, yPosition, sizeX, sizeY);
     };
