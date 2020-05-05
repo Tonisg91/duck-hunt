@@ -32,6 +32,8 @@ class Duck {
   }
 
   move() {
+    //Determinamos la direccion del movimiento segun la posicion
+    //Cambiamos la imagen acorde a la direccion
     if (this.x >= 50) {
       this.x -= this.xMovement;
       this.y -= this.yMovement;
@@ -47,6 +49,7 @@ class Duck {
   }
 
   animation() {
+    //Intercambiamos la imagen segun la anterior para crear la animacion
     switch (this.imgSrc) {
       case this.imgArr[3]:
         this.imgSrc = this.imgArr[0];

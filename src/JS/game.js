@@ -10,7 +10,8 @@ class Game {
     this.points = 0;
     this.lives = 3;
   }
-  draw() {
+
+  buildBoard() {
     this.score();
     this.eraseElements();
     this.drawElements();
@@ -18,6 +19,8 @@ class Game {
   } //draw()
 
   drawElements() {
+    //Iteramos sobre el array y llamamos a los metodos draw y move
+    //draw y move son iguales en todas las clases
     const drawAll = (array) => {
       if (array) {
         array.forEach((e) => {
@@ -30,11 +33,27 @@ class Game {
     drawAll(this.poo);
     drawAll(this.ducks);
     drawAll(this.shots);
-  }
+  } //drawElements
+
+  eraseElements() {
+    //Igual que drawElements pero eliminando el primer objeto de
+    // cada array en caso de que salgan de la pantalla
+    const erase = (array) => {
+      array.forEach((elem) => {
+        if (elem.y <= -elem.sizeY || elem.y >= this.canvas.height) {
+          array.shift();
+        }
+      });
+    };
+    erase(this.ducks);
+    erase(this.shots);
+    erase(this.poo);
+  } //eraseElements
 
   refresh() {
+    //Limpiamos y pintamos de nuevo
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.draw();
+    this.buildBoard();
   } //refresh()
 
   createDucks() {
@@ -47,6 +66,8 @@ class Game {
   } //createShot()
 
   createPoo() {
+    //La funcion solo sera llamada en caso que la condicion se cumpla
+    // para no saturar con demasiados objetos
     if (this.ducks) {
       let randomDuck = this.ducks[
         Math.floor(Math.random() * this.ducks.length)
@@ -58,6 +79,8 @@ class Game {
   } //createPoo
 
   move(event) {
+    //Movemos al personaje y/o creamos un disparo
+    //El personaje se detiene en caso de llegar al limite de la pantalla
     switch (event) {
       case "a":
         if (this.player.position > 0) {
@@ -75,19 +98,6 @@ class Game {
     }
   } //move
 
-  eraseElements() {
-    const erase = (array) => {
-      array.forEach((elem) => {
-        if (elem.y <= -elem.sizeY || elem.y >= this.canvas.height) {
-          array.shift();
-        }
-      });
-    };
-    erase(this.ducks);
-    erase(this.shots);
-    erase(this.poo);
-  } //eraseElements
-
   checkCollision() {
     //shots and ducks
     this.shots.forEach((bullet, bIdx) => {
@@ -97,9 +107,10 @@ class Game {
       this.ducks.forEach((duck, dIdx) => {
         let duckX = parseInt(duck.x);
         let duckY = parseInt(duck.y);
-        let duckEndX = duckX + 60;
-        let duckEndY = duckY + 90;
-
+        let duckEndX = duckX + duck.sizeX;
+        let duckEndY = duckY + duck.sizeY;
+        //Evalua si el disparo esta entre las coordenadas que ocupa el pato
+        //Si es asi, elimina el pato y la bala correspondientes
         if (
           bulletX > duckX &&
           bulletX < duckEndX &&
@@ -119,9 +130,9 @@ class Game {
       let pooY = parseInt(poo.y + poo.sizeY);
 
       let playerX = parseInt(this.player.position);
-      let playerEndX = playerX + this.player.sizeX * 2.5;
+      let playerEndX = playerX + this.player.sizeX;
       let playerY = parseInt(this.player.y);
-
+      //Igual que el anterior pero elimina poo correspondiente y resta una vida
       if (pooX > playerX - 5 && pooX < playerEndX && pooY >= playerY) {
         this.poo.splice(pIdx, 1);
         this.lives -= 1;
@@ -130,6 +141,7 @@ class Game {
   } //checkCollision
 
   score() {
+    //Muestra los datos de la partida en tiempo real
     const x = this.canvas.width - this.canvas.width * 0.15;
     const y = this.canvas.height * 0.1;
     this.ctx.fillStyle = "black";
