@@ -39,7 +39,7 @@ const main = () => {
           <h2 class="text-center">D</h2>
           <p>Move Right</p>
         </div>
-        <audio src="./sounds/Duck Hunt Intro.ogg" autoplay></audio>
+        <!-- <audio src="./sounds/Duck Hunt Intro.ogg" autoplay></audio> -->
     </section>
   `);
     setTimeout(gameBoard, 6000);
