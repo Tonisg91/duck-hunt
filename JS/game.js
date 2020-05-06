@@ -9,6 +9,7 @@ class Game {
     this.timer = 60;
     this.points = 0;
     this.lives = 3;
+    this.explosion = [];
   }
 
   buildBoard() {
@@ -32,6 +33,7 @@ class Game {
     this.player.draw();
     drawAll(this.poo);
     drawAll(this.ducks);
+    this.explosion.forEach((e) => e.draw());
     drawAll(this.shots);
   } //drawElements
 
@@ -118,9 +120,11 @@ class Game {
           bulletY < duckEndY
         ) {
           this.shots.splice(bIdx, 1);
+          this.ducks.splice(dIdx, 1);
           document.getElementById("shot").play();
           this.points += 25;
-          this.ducks.splice(dIdx, 1);
+          this.explosion.push(new Explosion(this.canvas, duck.x, duck.y));
+          setTimeout(this.removeExplosion, 500, this.explosion);
         }
       });
     });
@@ -159,4 +163,7 @@ class Game {
       this.timer -= 1;
     }
   } //score
-}
+  removeExplosion(exp) {
+    exp.shift();
+  }
+} //class

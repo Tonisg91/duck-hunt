@@ -14,10 +14,10 @@ class Duck {
       "./views/images/duckhunt_2.png",
       "./views/images/duckhunt_3.png",
       "./views/images/duckhunt_4.png",
-      "./views/images/explosion.svg",
     ];
     this.imgSrc = this.imgArr[3];
   }
+
   draw() {
     const ctx = this.ctx;
     const duckImg = new Image();
