@@ -13,7 +13,7 @@ const main = () => {
           <h1 id="duck">DUCK</h1>
           <h1 id="hunt">HUNT</h1>
           <button>START</button>
-          <audio src="/sounds/01 - Title Screen.ogg"  autoplay>
+          <audio src="../sounds/01 - Title Screen.ogg"  autoplay>
           </audio>
         </section>
     `
