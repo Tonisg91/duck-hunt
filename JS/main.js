@@ -13,7 +13,7 @@ const main = () => {
           <h1 id="duck">DUCK</h1>
           <h1 id="hunt">HUNT</h1>
           <button>START</button>
-          <audio src="./sounds/01 - Title Screen.ogg"  autoplay>
+          <audio src="/sounds/01 - Title Screen.ogg"  autoplay>
           </audio>
         </section>
     `
@@ -39,7 +39,7 @@ const main = () => {
           <h2 class="text-center">D</h2>
           <p>Move Right</p>
         </div>
-        <audio src="./sounds/Duck Hunt Intro.ogg" autoplay></audio>
+        <audio src="/sounds/Duck Hunt Intro.ogg" autoplay></audio>
     </section>
   `);
     setTimeout(gameBoard, 6000);
@@ -50,8 +50,8 @@ const main = () => {
               <section class="game-board">
                   <canvas></canvas>
               </section>
-              <audio src="./sounds/99 - Counting Hits (SFX).ogg" id="shot"></audio>
-              <audio src="./sounds/99 - Gunshot (SFX).ogg" id="gunshot"></audio>
+              <audio src="/sounds/99 - Counting Hits (SFX).ogg" id="shot"></audio>
+              <audio src="/sounds/99 - Gunshot (SFX).ogg" id="gunshot"></audio>
          `); //buildDom
     //CANVAS START
     const width = document.querySelector(".game-board").offsetWidth;
@@ -119,14 +119,14 @@ const main = () => {
       <section id="endGame" class="go-center">
         <h1>GAME OVER</h1>
         ${predefinedMessage}
-        <audio src="./sounds/08 - Game Over.ogg" autoplay></audio>
+        <audio src="/sounds/08 - Game Over.ogg" autoplay></audio>
       </section>
     `);
     } else {
       buildDom(`
       <section id="endGame" class="go-center">
         ${predefinedMessage}
-        <audio src="./sounds/05 - Round Clear.ogg" autoplay></audio>
+        <audio src="/sounds/05 - Round Clear.ogg" autoplay></audio>
       </section>
     `);
     }
