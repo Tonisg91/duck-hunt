@@ -16,7 +16,7 @@ class Shot {
     const sizeY = this.sizeY;
     const bulletImg = new Image();
     bulletImg.src =
-      "/views/images/bullet.png" || "https://i.ibb.co/qFNhRzz/weapons.png";
+      "./views/images/bullet.png" || "https://i.ibb.co/qFNhRzz/weapons.png";
     bulletImg.onload = function () {
       ctx.drawImage(bulletImg, x, y, sizeX, sizeY);
     };

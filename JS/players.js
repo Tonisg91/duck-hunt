@@ -16,7 +16,7 @@ class Player {
     const sizeY = this.sizeY;
     const playerImg = new Image();
     playerImg.src =
-      "/views/images/player.png" || "https://i.ibb.co/zbq4PR7/idle.gif";
+      "./views/images/player.png" || "https://i.ibb.co/zbq4PR7/idle.gif";
     playerImg.onload = function () {
       ctx.drawImage(playerImg, xPosition, yPosition, sizeX, sizeY);
     };
