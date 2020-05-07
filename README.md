@@ -1,6 +1,7 @@
 # Duck Hunt
 
 ## [Board](https://trello.com/b/EIygTVwM/duck-hunter)
+## [Juega!](https://tonisg91.github.io/duck-hunt/)
 
 ## Descripción
 
